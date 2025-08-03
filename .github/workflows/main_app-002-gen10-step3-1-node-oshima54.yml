@@ -56,11 +56,14 @@ jobs:
         with:
           name: node-app
       
+      - name: Unzip artifact for deployment
+        run: unzip release.zip
+      
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'app-002-gen10-step3-1-node-oshima54'
           slot-name: 'Production'
-          package: .
+          package: ./deploy
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_99209C42EDBE43B28E225906FBD7D3F6 }}
